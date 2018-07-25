@@ -4,10 +4,10 @@
 
 int main(void)
 {
-	int dec = 0;
-	printf("Enter decimal number: ");
-	scanf("%d", &dec);
-	printf("%d in binary is %d\n", dec, dec_to_bin(dec));
+	long bin = 0;
+	printf("Enter binary number (max. 19bits): ");
+	scanf("%ld", &bin);
+	printf("%ld in decimal is %ld\n", bin, bin_to_dec(bin));
 
 	return 0;
 }

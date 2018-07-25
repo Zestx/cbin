@@ -1,18 +1,23 @@
 long power(int base, int exp)
 {
 	int i = 1;
-	long result = base;
-	while (i < exp) {
-		result = result * base;
-		i++;
+	long result = 0;
+	if (exp == 0)
+		result = 1;
+	else {
+		result = base;
+		while (i < exp) {
+			result = result * base;
+			i++;
+		}
 	}
 
 	return result;
 }
 
-int bin_to_dec(int bin)
+long bin_to_dec(long bin)
 {
-	int dec = 0;
+	long dec = 0;
 	int i = 0;
 
 	while (bin) {
@@ -24,20 +29,5 @@ int bin_to_dec(int bin)
 	}
 
 	return dec;
-}
-
-int dec_to_bin(int dec)
-{
-	int bin = 0;
-	int i = 0;
-
-	while (dec) {
-		if (dec - power(2, i) > 0)
-			bin = bin + power(10, i);
-		dec = dec - power(2, i);
-		i++;
-	}
-
-	return bin;
 }	
 
