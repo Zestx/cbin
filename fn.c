@@ -2,66 +2,56 @@
 #include <stdlib.h>
 #include <string.h>
 
-long power(int base, int exp)
-{
-	int i = 1;
-	long result = 0;
-	if (exp == 0)
-		result = 1;
-	else {
-		result = base;
-		while (i < exp) {
-			result = result * base;
-			i++;
-		}
-	}
-
-	return result;
-}
-
+//Convert a binary number (encoded in decimal long format, max 19-bits) in decimal.
 long bin_to_dec19(long bin)
 {
 	long dec = 0;
-	int i = 0;
+	int dig = 1;
 	
 	while (bin) {
 		if (bin % 10 == 1)
-			dec = dec + power(2, i);
+			dec += dig;
+		dig *= 2;
 		bin = bin / 10;
-		i++;
 	}
 
 	return dec;
 }	
 
+//Convert a binary number (encoded in a string, max 64-bits) in decimal.
+//Doesn't work past 32-bit inputs??
 long bin_to_dec64(char bin[])
 {
 	int i = 0, j = 0, k = strlen(bin) - 1, tmp = 0;
 	long dec = 0;
+	int dig = 1;
+
+	printf("ok\n");
 	
 	//Reverse binary string
-	while (1) {
+	while (strlen(bin) > 1) {
+		
 		tmp = bin[k];
-		bin[k] = bin [j];
+		bin[k] = bin[j];
 		bin[j] = tmp;
-		k--;
-		j++;
-		if(strlen(bin) % 2 == 0 && k == j - 1)
-			break;
-		if(strlen(bin) % 2 != 0 && k == j)
+		j++, k--;
+		printf("reverse1 ok\n");
+		if((strlen(bin) % 2 == 0 && k == j - 1) || (strlen(bin) % 2 != 0 && k == j))
 			break;
 	}
-		
+	
 	//'Translate' the binary number into a decimal number
 	while (bin[i] != '\0') {
 		if (bin[i] == '1') {
-			dec = dec + power(2, i);
+			dec += dig;
 		}
+		
 		if (bin[i] != '0' && bin[i] != '1') {
 			printf("Error: Not a binary number.\n");
 			exit(EXIT_FAILURE);
 		}
 		i++;
+		dig *= 2;
 	}
 
 	return dec;
