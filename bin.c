@@ -15,7 +15,7 @@ int main(void)
 		if (newline != NULL) { 
 			*newline = '\0';
 		}
-		printf("In decimal: %d\n", bin_to_dec64(bin));
+		printf("In decimal: %ld\n", bin_to_dec64(bin));
 	} else {
 		printf("Error\n");
 		exit(EXIT_FAILURE);

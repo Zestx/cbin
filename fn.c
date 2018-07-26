@@ -34,16 +34,25 @@ long bin_to_dec19(long bin)
 	return dec;
 }	
 
-int bin_to_dec64(char bin[])
+long bin_to_dec64(char bin[])
 {
-	int i = 0, j = 0, k = 0;
-	int dec = 0;
-
-	while (bin[j] != '\0') {
-		printf("%c", bin[j]);
+	int i = 0, j = 0, k = strlen(bin) - 1, tmp = 0;
+	long dec = 0;
+	
+	//Reverse binary string
+	while (1) {
+		tmp = bin[k];
+		bin[k] = bin [j];
+		bin[j] = tmp;
+		k--;
 		j++;
+		if(strlen(bin) % 2 == 0 && k == j - 1)
+			break;
+		if(strlen(bin) % 2 != 0 && k == j)
+			break;
 	}
-	printf("\n");
+		
+	//'Translate' the binary number into a decimal number
 	while (bin[i] != '\0') {
 		if (bin[i] == '1') {
 			dec = dec + power(2, i);
